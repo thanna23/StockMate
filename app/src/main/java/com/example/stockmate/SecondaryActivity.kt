@@ -1,5 +1,6 @@
 package com.example.stockmate
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -64,6 +65,9 @@ class SecondaryActivity : AppCompatActivity() {
             if (currentCategory == ArticleType.MINERALES.id) {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
+
             } else {
                 actualiseArticles(currentCategory, BACK_ACTION)
                 articleAdapter = articleAdapter.changeList(categoryArticlesList)
@@ -78,6 +82,8 @@ class SecondaryActivity : AppCompatActivity() {
                 val intent = Intent(this, SummaryActivity::class.java)
                 intent.putParcelableArrayListExtra("shopList", ArrayList<Article>(shopList))
                 startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
 
             } else {
                 actualiseArticles(currentCategory, NEXT_ACTION)

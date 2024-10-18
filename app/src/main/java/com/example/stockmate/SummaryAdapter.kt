@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class SummaryAdapter(private val shopList: List<Article>, private val onClick: (Article) -> Unit) :
+class SummaryAdapter(private var shopList: List<Article>, private val onClick: (Article) -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     // Type de vue pour différencier les catégories et les articles
@@ -85,7 +85,9 @@ class SummaryAdapter(private val shopList: List<Article>, private val onClick: (
         }
     }
 
-    class CategoryViewHolder(categoryView: View) : RecyclerView.ViewHolder(categoryView) {
+
+
+        class CategoryViewHolder(categoryView: View) : RecyclerView.ViewHolder(categoryView) {
         val categoryTextView: TextView = categoryView.findViewById(R.id.category)
     }
 

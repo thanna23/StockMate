@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -15,7 +16,7 @@ class SummaryActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var sumAdapter: SummaryAdapter
-    private lateinit var resetButton : Button
+    private lateinit var resetButton: Button
     private lateinit var endButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +29,7 @@ class SummaryActivity : AppCompatActivity() {
             insets
         }
 
-        var shopList : ArrayList<Article>? = intent.getParcelableArrayListExtra("shopList")
+        var shopList: ArrayList<Article>? = intent.getParcelableArrayListExtra("shopList")
 
         // Configuration de la RecyclerView
         recyclerView = findViewById(R.id.recyclerView)
@@ -36,21 +37,41 @@ class SummaryActivity : AppCompatActivity() {
 
         if (shopList != null) {
             shopList.groupBy { it.type }
-            sumAdapter = SummaryAdapter(shopList.toList()){}
+            sumAdapter = SummaryAdapter(shopList.toList()) {}
             recyclerView.adapter = sumAdapter
         }
 
-        resetButton= findViewById(R.id.resetButton)
+        resetButton = findViewById(R.id.resetButton)
         resetButton.setOnClickListener {
             val intent = intent
             finish()
             intent.putParcelableArrayListExtra("shopList", ArrayList(shopList))
             startActivity(intent)
+            overridePendingTransition(R.anim.shade_reset_in, R.anim.shade_reset_out)
         }
-        endButton= findViewById(R.id.nextButton)
+
+        endButton = findViewById(R.id.nextButton)
         endButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+
+            //Création du message de fin
+            val builder = AlertDialog.Builder(this, R.style.CustomAlertDialogTheme)
+            builder.setTitle("BRAVO !!")
+            builder.setMessage("Congratulation you have finished the restock... Now get back to work !!")
+
+            // Ajouter du bouton "continue"
+            builder.setPositiveButton("Continue") { dialog, _ ->
+                dialog.dismiss()
+
+                //Ouverture de la main activity
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            }
+
+            // Création et affichage la boîte de dialogue
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+
         }
 
 
