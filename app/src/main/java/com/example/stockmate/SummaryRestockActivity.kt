@@ -2,6 +2,7 @@ package com.example.stockmate
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -12,12 +13,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.util.ArrayList
 
-class SummaryActivity : AppCompatActivity() {
+class SummaryRestockActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var sumAdapter: SummaryAdapter
+    private lateinit var mainSumAdapter: SummaryAdapter
+    private lateinit var initialSumAdapter: SummaryAdapter
+    private lateinit var currentSumAdapter: SummaryAdapter
     private lateinit var resetButton: Button
     private lateinit var endButton: Button
+    private lateinit var initialListButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +33,12 @@ class SummaryActivity : AppCompatActivity() {
             insets
         }
 
-        var shopList: ArrayList<Article>? = intent.getParcelableArrayListExtra("shopList")
+        val shopList: ArrayList<Article>? = intent.getParcelableArrayListExtra("shopList")
+
+        fun updateSumAdapter(newSumAdapter: SummaryAdapter) {
+            recyclerView.adapter = newSumAdapter
+            currentSumAdapter = newSumAdapter
+        }
 
         // Configuration de la RecyclerView
         recyclerView = findViewById(R.id.recyclerView)
@@ -37,24 +46,43 @@ class SummaryActivity : AppCompatActivity() {
 
         if (shopList != null) {
             shopList.groupBy { it.type }
-            sumAdapter = SummaryAdapter(shopList.toList()) {}
-            recyclerView.adapter = sumAdapter
+
+            initialSumAdapter = SummaryAdapter(shopList.toList())
+            mainSumAdapter = SummaryAdapter(shopList.toList())
+            updateSumAdapter(mainSumAdapter)
         }
 
         resetButton = findViewById(R.id.resetButton)
         resetButton.setOnClickListener {
-            val intent = intent
-            finish()
-            intent.putParcelableArrayListExtra("shopList", ArrayList(shopList))
-            startActivity(intent)
-            overridePendingTransition(R.anim.shade_reset_in, R.anim.shade_reset_out)
+            if (shopList != null) {
+                updateSumAdapter(SummaryAdapter(shopList.toList()))
+            }
         }
 
-        endButton = findViewById(R.id.nextButton)
+        initialListButton = findViewById(R.id.initialListButton)
+        initialListButton.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    recyclerView.adapter = initialSumAdapter
+                    true
+                }
+
+                MotionEvent.ACTION_UP -> {
+                    v.performClick()
+                    recyclerView.adapter = currentSumAdapter
+
+                    true
+                }
+
+                else -> false
+            }
+        }
+
+        endButton = findViewById(R.id.endButton)
         endButton.setOnClickListener {
 
             //Création du message de fin
-            val builder = AlertDialog.Builder(this, R.style.CustomAlertDialogTheme)
+            val builder = AlertDialog.Builder(this, R.style.EndAlertDialogTheme)
             builder.setTitle("BRAVO !!")
             builder.setMessage("Congratulation you have finished the restock... Now get back to work !!")
 

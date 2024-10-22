@@ -6,22 +6,22 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ArticleAdapter(private val articles: List<Article>, private val onClick: (Article) -> Unit,
-                     private val onLongClick: (Article) -> Unit ) :
-    RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
+class ArticleRestockAdapter(private val articles: List<Article>, private val onClick: (Article) -> Unit,
+                            private val onLongClick: (Article) -> Unit ) :
+    RecyclerView.Adapter<ArticleRestockAdapter.ArticleRestockViewHolder>() {
 
-    class ArticleViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    class ArticleRestockViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val tvTitle: TextView = view.findViewById(R.id.tvArticleTitle)
         val tvCounter: TextView = view.findViewById(R.id.tvArticleCounter)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleRestockViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.article, parent, false)
-        return ArticleViewHolder(view)
+            .inflate(R.layout.article_restock, parent, false)
+        return ArticleRestockViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ArticleRestockViewHolder, position: Int) {
         val article = articles[position]
         holder.tvTitle.text = article.title
         holder.tvCounter.text = article.counter.toString()
@@ -41,7 +41,7 @@ class ArticleAdapter(private val articles: List<Article>, private val onClick: (
 
     override fun getItemCount() = articles.size
 
-    fun changeList(newArticles: List<Article>): ArticleAdapter {
-        return ArticleAdapter(newArticles, this.onClick, this.onLongClick)
+    fun changeList(newArticles: List<Article>): ArticleRestockAdapter {
+        return ArticleRestockAdapter(newArticles, this.onClick, this.onLongClick)
     }
 }

@@ -1,0 +1,42 @@
+package com.example.stockmate
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.CheckBox
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.stockmate.ArticleRestockAdapter.ArticleRestockViewHolder
+
+class ArticleOrderListAdapter(private val articles: List<Article>) :
+    RecyclerView.Adapter<ArticleOrderListAdapter.ArticleOrderListViewHolder>() {
+
+    class ArticleOrderListViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+        val tvTitle: TextView = view.findViewById(R.id.tvArticleTitle)
+        val orderValue: CheckBox = view.findViewById(R.id.orderValueCheckBox)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleOrderListViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.article_order_list, parent, false)
+        return ArticleOrderListViewHolder(view)
+    }
+
+    override fun getItemCount() = articles.size
+
+    override fun onBindViewHolder(holder: ArticleOrderListViewHolder, position: Int) {
+        val article = articles[position]
+        holder.tvTitle.text = article.title
+        holder.orderValue.isChecked = article.orderValue
+
+        holder.orderValue.setOnCheckedChangeListener{ _, isChecked ->
+            article.orderValue = isChecked
+        }
+
+    }
+
+
+    fun changeList(newArticles: List<Article>): ArticleOrderListAdapter {
+        return ArticleOrderListAdapter(newArticles)
+    }
+}

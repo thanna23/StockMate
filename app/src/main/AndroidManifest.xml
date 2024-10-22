@@ -12,25 +12,39 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StockMate"
         tools:targetApi="31">
-        <activity
-            android:name=".SummaryActivity"
-            android:screenOrientation="portrait"
-            android:exported="false"/>
+
 
         <activity
-            android:name=".SecondaryActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".RestockActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".SummaryRestockActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".OrderListActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="SummaryOrderListActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

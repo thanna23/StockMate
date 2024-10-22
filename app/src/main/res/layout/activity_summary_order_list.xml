@@ -31,13 +31,13 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/resetButton"
+        android:id="@+id/copyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:width="80dp"
         android:backgroundTint="#072AEF"
-        android:text="Reset"
+        android:text="Copy"
         android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="@+id/recyclerView"
         app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
@@ -50,9 +50,9 @@
         android:backgroundTint="#072AEF"
         android:text="End"
         android:textColor="#FFFFFF"
-
-        app:layout_constraintBottom_toBottomOf="@+id/resetButton"
-        app:layout_constraintEnd_toEndOf="@+id/recyclerView" />
+        app:layout_constraintBottom_toBottomOf="@+id/copyButton"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerView"
+        app:layout_constraintTop_toTopOf="@+id/copyButton" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -64,18 +64,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/stockmate_logo_500x500_transp" />
 
-    <Button
-        android:id="@+id/initialListButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginEnd="15dp"
-        android:backgroundTint="#072AEF"
-        android:text="See Initial List"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/resetButton"
-        app:layout_constraintEnd_toStartOf="@+id/endButton"
-        app:layout_constraintStart_toEndOf="@+id/resetButton"
-        app:layout_constraintTop_toTopOf="@+id/resetButton" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,18 +1,27 @@
 package com.example.stockmate
 
+import android.os.Build
 import android.os.Parcelable
 import android.os.Parcel
+import androidx.annotation.RequiresApi
 
-data class Article(val title: String, var counter: Int = 0, var type: Int) : Parcelable {
+data class Article(val title: String, var counter: Int = 0, var orderValue: Boolean, var type: Int) : Parcelable {
+
+    constructor(title: String, counter: Int, type: Int) : this(title,counter, false,type) {}
+
+    @RequiresApi(Build.VERSION_CODES.Q)
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
         parcel.readInt(),
+        parcel.readBoolean(),
         parcel.readInt()
     )
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(title)
         parcel.writeInt(counter)
+        parcel.writeBoolean(orderValue)
         parcel.writeInt(type)
     }
 
@@ -21,6 +30,7 @@ data class Article(val title: String, var counter: Int = 0, var type: Int) : Par
     }
 
     companion object CREATOR : Parcelable.Creator<Article> {
+        @RequiresApi(Build.VERSION_CODES.Q)
         override fun createFromParcel(parcel: Parcel): Article {
             return Article(parcel)
         }
@@ -76,7 +86,6 @@ data class Article(val title: String, var counter: Int = 0, var type: Int) : Par
             allArticles.add(Article("Miller", 0, 1))
             allArticles.add(Article("San Miguel", 0, 1))
             allArticles.add(Article("Desperados", 0, 1))
-            allArticles.add(Article("Corona", 0, 1))
             allArticles.add(Article("Corona", 0, 1))
 
 
@@ -195,12 +204,6 @@ data class Article(val title: String, var counter: Int = 0, var type: Int) : Par
             allArticles.add(Article("Crème (Box)", 0, 8))
             allArticles.add(Article("Chocolats (Pack)", 0, 8))
             allArticles.add(Article("Sucres (Box)", 0, 8))
-
-
-
-
-
-
 
             return allArticles
         }

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#091158"
     android:visibility="visible"
-    tools:context=".SecondaryActivity">
+    tools:context=".OrderListActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
     <Button
-        android:id="@+id/nextButton"
+        android:id="@+id/endButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:width="80dp"
@@ -66,7 +66,7 @@
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="30dp"
-        app:layout_constraintEnd_toStartOf="@+id/nextButton"
+        app:layout_constraintEnd_toStartOf="@+id/endButton"
         app:layout_constraintStart_toEndOf="@+id/backButton"
         app:layout_constraintTop_toTopOf="@+id/backButton" />
 
@@ -79,6 +79,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/stockmate_logo_500x500_transp" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

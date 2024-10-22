@@ -1,6 +1,5 @@
 package com.example.stockmate
 
-import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -13,11 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.util.ArrayList
 
-class SecondaryActivity : AppCompatActivity() {
+class RestockActivity : AppCompatActivity() {
 
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var articleAdapter: ArticleAdapter
+    private lateinit var articleAdapter: ArticleRestockAdapter
     private lateinit var backButton: Button
     private lateinit var nextButton: Button
     private lateinit var tvCategory: TextView
@@ -33,7 +32,7 @@ class SecondaryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_secondary)
+        setContentView(R.layout.activity_restock)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -50,7 +49,7 @@ class SecondaryActivity : AppCompatActivity() {
         defineArticles(currentCategory)
 
         // Initialisation de l'adapter
-        articleAdapter = ArticleAdapter(categoryArticlesList, ({ article ->
+        articleAdapter = ArticleRestockAdapter(categoryArticlesList, ({ article ->
             article.counter++
         }), ({ a -> a.counter-- }))
 
@@ -58,7 +57,7 @@ class SecondaryActivity : AppCompatActivity() {
 
         //Initialisation des boutons
         backButton = findViewById(R.id.backButton)
-        nextButton = findViewById(R.id.nextButton)
+        nextButton = findViewById(R.id.endButton)
 
         backButton.setOnClickListener {
             actualiseShopList()
@@ -66,7 +65,6 @@ class SecondaryActivity : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-
 
             } else {
                 actualiseArticles(currentCategory, BACK_ACTION)
@@ -79,7 +77,7 @@ class SecondaryActivity : AppCompatActivity() {
             actualiseShopList()
 
             if (currentCategory == ArticleType.values().size - 1) {
-                val intent = Intent(this, SummaryActivity::class.java)
+                val intent = Intent(this, SummaryRestockActivity::class.java)
                 intent.putParcelableArrayListExtra("shopList", ArrayList<Article>(shopList))
                 startActivity(intent)
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
@@ -120,7 +118,8 @@ class SecondaryActivity : AppCompatActivity() {
     private fun actualiseShopList() {
         for (article in categoryArticlesList) {
             if (article.counter != 0) {
-                val existingArticle = shopList.find { it.title == article.title }
+                val existingArticle = shopList.find { it.title == article.title
+                        && it.type == article.type}
 
                 if (existingArticle == null) {
                     shopList.add(article)
