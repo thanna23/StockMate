@@ -1,4 +1,4 @@
-package com.example.stockmate
+package com.example.stockmate.orderlist
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,12 +6,16 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.stockmate.ArticleRestockAdapter.ArticleRestockViewHolder
+import com.example.stockmate.Article
+import com.example.stockmate.R
 
-class ArticleOrderListAdapter(private val articles: List<Article>) :
+class ArticleOrderListAdapter(
+    private val articles: List<Article>,
+    private val onClick: (Article) -> Unit
+) :
     RecyclerView.Adapter<ArticleOrderListAdapter.ArticleOrderListViewHolder>() {
 
-    class ArticleOrderListViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    class ArticleOrderListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvTitle: TextView = view.findViewById(R.id.tvArticleTitle)
         val orderValue: CheckBox = view.findViewById(R.id.orderValueCheckBox)
     }
@@ -27,16 +31,16 @@ class ArticleOrderListAdapter(private val articles: List<Article>) :
     override fun onBindViewHolder(holder: ArticleOrderListViewHolder, position: Int) {
         val article = articles[position]
         holder.tvTitle.text = article.title
+
+        holder.orderValue.setOnCheckedChangeListener(null)
         holder.orderValue.isChecked = article.orderValue
-
-        holder.orderValue.setOnCheckedChangeListener{ _, isChecked ->
-            article.orderValue = isChecked
+        holder.orderValue.setOnCheckedChangeListener { _, _ ->
+            onClick(article)
         }
-
     }
 
 
     fun changeList(newArticles: List<Article>): ArticleOrderListAdapter {
-        return ArticleOrderListAdapter(newArticles)
+        return ArticleOrderListAdapter(newArticles, this.onClick)
     }
 }

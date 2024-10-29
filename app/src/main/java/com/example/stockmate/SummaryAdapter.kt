@@ -6,15 +6,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class SummaryAdapter(private var shopList: List<Article>):
+open class SummaryAdapter(private var shopList: List<Article>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    // Type de vue pour différencier les catégories et les articles
     private val TYPE_CATEGORY = 0
     private val TYPE_ARTICLE = 1
 
+
     // Liste pour stocker les catégories et les articles
-    private val categorizedShopList = mutableListOf<Any>()
+    val categorizedShopList = mutableListOf<Any>()
 
     init {
         categorizeArticles()
@@ -31,7 +31,6 @@ class SummaryAdapter(private var shopList: List<Article>):
         }
     }
 
-    // Crée la vue pour chaque type (catégorie ou article)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == TYPE_CATEGORY) {
             val categoryView = LayoutInflater.from(parent.context)
@@ -55,18 +54,10 @@ class SummaryAdapter(private var shopList: List<Article>):
         } else if (holder is SummaryViewHolder && item is Article) {
             // Lier l'article au SummaryViewHolder
             holder.titleTextView.text = item.title
-            holder.counterTextView.text = item.counter.toString()
-
-            holder.titleTextView.setOnClickListener {
-                categorizedShopList.removeAt(position)
-                notifyItemRangeRemoved(position, itemCount - position)
-                notifyItemRemoved(position)
-                if (categorizedShopList.count { it is Article && it.type == item.type } == 0){
-                    categorizedShopList.removeAt(position-1)
-                    notifyItemRangeRemoved(position-1, itemCount - position-1)
-                    notifyItemRemoved(position-1)
-                }
+            if (item.counter != 0){
+                holder.counterTextView.text = item.counter.toString()
             }
+
         }
     }
 
@@ -84,14 +75,15 @@ class SummaryAdapter(private var shopList: List<Article>):
         }
     }
 
-
-
-        class CategoryViewHolder(categoryView: View) : RecyclerView.ViewHolder(categoryView) {
+    class CategoryViewHolder(categoryView: View) : RecyclerView.ViewHolder(categoryView) {
         val categoryTextView: TextView = categoryView.findViewById(R.id.category)
     }
 
     class SummaryViewHolder(summaryView: View) : RecyclerView.ViewHolder(summaryView) {
         val titleTextView: TextView = summaryView.findViewById(R.id.tvArticleTitle)
         val counterTextView: TextView = summaryView.findViewById(R.id.tvArticleCounter)
+
     }
 }
+
+

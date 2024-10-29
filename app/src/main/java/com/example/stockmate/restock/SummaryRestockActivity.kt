@@ -1,4 +1,4 @@
-package com.example.stockmate
+package com.example.stockmate.restock
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,14 +11,17 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.stockmate.Article
+import com.example.stockmate.MainActivity
+import com.example.stockmate.R
 import java.util.ArrayList
 
 class SummaryRestockActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var mainSumAdapter: SummaryAdapter
-    private lateinit var initialSumAdapter: SummaryAdapter
-    private lateinit var currentSumAdapter: SummaryAdapter
+    private lateinit var mainSumAdapter: SummaryRestockAdapter
+    private lateinit var initialSumAdapter: SummaryRestockAdapter
+    private lateinit var currentSumAdapter: SummaryRestockAdapter
     private lateinit var resetButton: Button
     private lateinit var endButton: Button
     private lateinit var initialListButton: Button
@@ -35,7 +38,7 @@ class SummaryRestockActivity : AppCompatActivity() {
 
         val shopList: ArrayList<Article>? = intent.getParcelableArrayListExtra("shopList")
 
-        fun updateSumAdapter(newSumAdapter: SummaryAdapter) {
+        fun updateSumAdapter(newSumAdapter: SummaryRestockAdapter) {
             recyclerView.adapter = newSumAdapter
             currentSumAdapter = newSumAdapter
         }
@@ -47,15 +50,15 @@ class SummaryRestockActivity : AppCompatActivity() {
         if (shopList != null) {
             shopList.groupBy { it.type }
 
-            initialSumAdapter = SummaryAdapter(shopList.toList())
-            mainSumAdapter = SummaryAdapter(shopList.toList())
+            initialSumAdapter = SummaryRestockAdapter(shopList.toList())
+            mainSumAdapter = SummaryRestockAdapter(shopList.toList())
             updateSumAdapter(mainSumAdapter)
         }
 
         resetButton = findViewById(R.id.resetButton)
         resetButton.setOnClickListener {
             if (shopList != null) {
-                updateSumAdapter(SummaryAdapter(shopList.toList()))
+                updateSumAdapter(SummaryRestockAdapter(shopList.toList()))
             }
         }
 

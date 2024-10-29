@@ -1,10 +1,12 @@
-package com.example.stockmate
+package com.example.stockmate.restock
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.stockmate.Article
+import com.example.stockmate.R
 
 class ArticleRestockAdapter(private val articles: List<Article>, private val onClick: (Article) -> Unit,
                             private val onLongClick: (Article) -> Unit ) :

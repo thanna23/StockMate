@@ -7,7 +7,7 @@ import androidx.annotation.RequiresApi
 
 data class Article(val title: String, var counter: Int = 0, var orderValue: Boolean, var type: Int) : Parcelable {
 
-    constructor(title: String, counter: Int, type: Int) : this(title,counter, false,type) {}
+    constructor(title: String, counter: Int, type: Int) : this(title,counter, false,type)
 
     @RequiresApi(Build.VERSION_CODES.Q)
     constructor(parcel: Parcel) : this(
@@ -208,4 +208,7 @@ data class Article(val title: String, var counter: Int = 0, var orderValue: Bool
             return allArticles
         }
     }
+
+    public fun changeOrderVal() = if (orderValue) orderValue = false
+    else orderValue = true
 }

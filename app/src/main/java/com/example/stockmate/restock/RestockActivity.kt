@@ -1,4 +1,4 @@
-package com.example.stockmate
+package com.example.stockmate.restock
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,17 +10,20 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.stockmate.Article
+import com.example.stockmate.ArticleType
+import com.example.stockmate.MainActivity
+import com.example.stockmate.R
 import java.util.ArrayList
 
-class OrderListActivity : AppCompatActivity(){
+class RestockActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var articleAdapter: ArticleOrderListAdapter
+    private lateinit var articleAdapter: ArticleRestockAdapter
     private lateinit var backButton: Button
     private lateinit var nextButton: Button
     private lateinit var tvCategory: TextView
     private lateinit var tvPageCount: TextView
-
 
     private var categoryArticlesList = mutableListOf<Article>()
     private var shopList = mutableSetOf<Article>()
@@ -28,16 +31,18 @@ class OrderListActivity : AppCompatActivity(){
     private val BACK_ACTION = 0
     private val NEXT_ACTION = 1
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_order_list)
+        setContentView(R.layout.activity_restock)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
+        // Configuration de l'Interface
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         tvCategory = findViewById(R.id.tvCategory)
@@ -46,7 +51,11 @@ class OrderListActivity : AppCompatActivity(){
         //Initialisation de la list des Articles
         defineArticles(currentCategory)
 
-        articleAdapter = ArticleOrderListAdapter(categoryArticlesList)
+        // Initialisation de l'adapter
+        articleAdapter = ArticleRestockAdapter(categoryArticlesList, ({ article ->
+            article.counter++
+        }), ({ a -> a.counter-- }))
+
         recyclerView.adapter = articleAdapter
 
         //Initialisation des boutons
@@ -71,8 +80,8 @@ class OrderListActivity : AppCompatActivity(){
             actualiseShopList()
 
             if (currentCategory == ArticleType.values().size - 1) {
-                val intent = Intent(this, SummaryOrderListActivity::class.java)
-                intent.putParcelableArrayListExtra("shopList", ArrayList(shopList))
+                val intent = Intent(this, SummaryRestockActivity::class.java)
+                intent.putParcelableArrayListExtra("shopList", ArrayList<Article>(shopList))
                 startActivity(intent)
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
 
@@ -110,10 +119,9 @@ class OrderListActivity : AppCompatActivity(){
         }
     }
 
-
     private fun actualiseShopList() {
         for (article in categoryArticlesList) {
-            if (article.orderValue) {
+            if (article.counter != 0) {
                 val existingArticle = shopList.find { it.title == article.title
                         && it.type == article.type}
 
@@ -128,4 +136,5 @@ class OrderListActivity : AppCompatActivity(){
             }
         }
     }
+
 }

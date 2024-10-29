@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#091158"
     android:visibility="visible"
-    tools:context=".RestockActivity">
+    tools:context=".restock.RestockActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

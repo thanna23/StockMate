@@ -8,6 +8,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.stockmate.orderlist.OrderListActivity
+import com.example.stockmate.restock.RestockActivity
 
 class MainActivity : AppCompatActivity() {
 

@@ -26,22 +26,22 @@
         </activity>
 
         <activity
-            android:name=".RestockActivity"
+            android:name=".restock.RestockActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".SummaryRestockActivity"
+            android:name=".restock.SummaryRestockActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".OrderListActivity"
+            android:name=".orderlist.OrderListActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="SummaryOrderListActivity"
+            android:name=".orderlist.SummaryOrderListActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 
