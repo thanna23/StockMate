@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.stockmate.history.HistoryActivity
 import com.example.stockmate.orderlist.OrderListActivity
 import com.example.stockmate.restock.RestockActivity
 
@@ -36,6 +37,11 @@ class MainActivity : AppCompatActivity() {
         }
         btStartingButton.setOnClickListener {
             showOptionsDialog()
+        }
+
+        findViewById<Button>(R.id.btHistory).setOnClickListener {
+            startActivity(Intent(this, HistoryActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
     }
 
