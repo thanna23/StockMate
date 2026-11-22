@@ -3,6 +3,7 @@ package com.example.stockmate
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ import com.example.stockmate.restock.RestockActivity
 class MainActivity : AppCompatActivity() {
 
     private lateinit var btStartingButton: Button
+    private lateinit var btSettings : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +28,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         btStartingButton = findViewById(R.id.btStartingButton)
+        btSettings = findViewById(R.id.settings)
 
+        btSettings.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent);
+        }
         btStartingButton.setOnClickListener {
             showOptionsDialog()
         }
