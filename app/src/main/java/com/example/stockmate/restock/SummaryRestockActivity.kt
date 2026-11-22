@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.stockmate.Article
 import com.example.stockmate.MainActivity
 import com.example.stockmate.R
+import com.example.stockmate.history.HistoryRepository
 import java.util.ArrayList
 
 class SummaryRestockActivity : AppCompatActivity() {
@@ -83,6 +85,18 @@ class SummaryRestockActivity : AppCompatActivity() {
 
         endButton = findViewById(R.id.endButton)
         endButton.setOnClickListener {
+            // Guard against double taps saving the same restock twice.
+            endButton.isEnabled = false
+
+            // Save the restock to Firestore so it shows up in History. The write is
+            // queued locally right away (works offline) and synced in the background.
+            if (!shopList.isNullOrEmpty()) {
+                val appContext = applicationContext
+                HistoryRepository.saveRestock(shopList) { success ->
+                    val msg = if (success) "Restock saved" else "Failed to save restock"
+                    Toast.makeText(appContext, msg, Toast.LENGTH_SHORT).show()
+                }
+            }
 
             //Création du message de fin
             val builder = AlertDialog.Builder(this, R.style.EndAlertDialogTheme)

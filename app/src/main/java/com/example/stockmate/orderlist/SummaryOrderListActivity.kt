@@ -17,6 +17,7 @@ import com.example.stockmate.Article
 import com.example.stockmate.ArticleType
 import com.example.stockmate.MainActivity
 import com.example.stockmate.R
+import com.example.stockmate.history.HistoryRepository
 import java.util.ArrayList
 
 class SummaryOrderListActivity : AppCompatActivity() {
@@ -80,7 +81,7 @@ class SummaryOrderListActivity : AppCompatActivity() {
             // (works offline) and synced to the server in the background.
             if (!shopList.isNullOrEmpty()) {
                 val appContext = applicationContext
-                OrderRepository.saveOrder(shopList) { success ->
+                HistoryRepository.saveOrder(shopList) { success ->
                     val msg = if (success) "Order saved" else "Failed to save order"
                     Toast.makeText(appContext, msg, Toast.LENGTH_SHORT).show()
                 }
