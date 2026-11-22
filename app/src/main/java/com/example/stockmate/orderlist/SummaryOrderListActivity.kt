@@ -5,6 +5,7 @@ import android.content.ClipboardManager
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -72,6 +73,18 @@ class SummaryOrderListActivity : AppCompatActivity() {
 
         endButton = findViewById(R.id.endButton)
         endButton.setOnClickListener {
+            // Guard against double taps saving the same order twice.
+            endButton.isEnabled = false
+
+            // Save the order to Firestore. The write is queued locally right away
+            // (works offline) and synced to the server in the background.
+            if (!shopList.isNullOrEmpty()) {
+                val appContext = applicationContext
+                OrderRepository.saveOrder(shopList) { success ->
+                    val msg = if (success) "Order saved" else "Failed to save order"
+                    Toast.makeText(appContext, msg, Toast.LENGTH_SHORT).show()
+                }
+            }
 
             val builder = AlertDialog.Builder(this, R.style.EndAlertDialogTheme)
             builder.setTitle("BRAVO !!")

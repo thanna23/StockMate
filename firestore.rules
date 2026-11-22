@@ -1,0 +1,19 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Clients must be signed in (anonymous auth is enough) and may only CREATE
+    // orders with the expected shape, tagged with their own uid.
+    // Reading/updating/deleting from the app is blocked.
+    match /orders/{orderId} {
+      allow read: if false;
+      allow update, delete: if false;
+      allow create: if request.auth != null
+                    && request.resource.data.keys().hasOnly(['createdAt', 'itemCount', 'items', 'uid'])
+                    && request.resource.data.uid == request.auth.uid
+                    && request.resource.data.createdAt == request.time
+                    && request.resource.data.items is list
+                    && request.resource.data.items.size() <= 500
+                    && request.resource.data.itemCount == request.resource.data.items.size();
+    }
+  }
+}
