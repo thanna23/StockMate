@@ -2,27 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="5dp"
+    android:background="@drawable/bg_row"
+    android:gravity="center_vertical"
+    android:minHeight="64dp"
     android:orientation="horizontal"
-    android:paddingStart="20dp"
-    android:paddingTop="16dp"
-    android:paddingEnd="20dp"
-    android:paddingBottom="16dp">
+    android:paddingStart="18dp"
+    android:paddingEnd="14dp">
 
     <TextView
         android:id="@+id/tvHistoryDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textColor="#3F51B5"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/sm_text"
+        android:textSize="17sp" />
 
     <TextView
         android:id="@+id/tvHistoryCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#2196F3"
-        android:textSize="16sp" />
+        android:background="@drawable/bg_badge"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="4dp"
+        android:textColor="@color/sm_on_badge"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
 </LinearLayout>

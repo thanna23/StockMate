@@ -5,85 +5,84 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#091158"
+    android:background="@drawable/bg_screen"
     tools:context=".MainActivity">
-
-    <Button
-        android:id="@+id/btStartingButton"
-        android:layout_width="190dp"
-        android:layout_height="60dp"
-        android:backgroundTint="#FFFFFF"
-        android:fontFamily="casual"
-        android:text="Start"
-        android:textColor="#091158"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivLogo"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/btHistory"
-        android:layout_width="128dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#FFFFFF"
-        android:text="History"
-        android:textAllCaps="true"
-        android:textColor="#091158"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btEdit" />
-
-    <Button
-        android:id="@+id/btEdit"
-        android:layout_width="128dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#FFFFFF"
-        android:text="Edit"
-        android:textAllCaps="true"
-        android:textColor="#091158"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btStartingButton" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:fontFamily="casual"
-        android:text="Made by Tarek Hanna"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/ivLogo"
-        android:layout_width="365dp"
-        android:layout_height="420dp"
-        android:cropToPadding="false"
+        android:layout_width="340dp"
+        android:layout_height="380dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="StockMate logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/stockmate_logo_500x500_transp" />
 
-    <ImageView
-        android:id="@+id/settings"
+    <Button
+        android:id="@+id/btStartingButton"
+        style="@style/Widget.StockMate.Button.Primary"
+        android:layout_width="240dp"
+        android:layout_height="60dp"
+        android:fontFamily="casual"
+        android:text="Start"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:cornerRadius="30dp"
+        app:elevation="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
+
+    <Button
+        android:id="@+id/btEdit"
+        style="@style/Widget.StockMate.Button.Secondary"
+        android:layout_width="240dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="16dp"
+        android:text="Edit"
+        app:cornerRadius="26dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btStartingButton" />
+
+    <Button
+        android:id="@+id/btHistory"
+        style="@style/Widget.StockMate.Button.Secondary"
+        android:layout_width="240dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="12dp"
+        android:text="History"
+        app:cornerRadius="26dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btEdit" />
+
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="casual"
+        android:text="Made by Tarek Hanna"
+        android:textColor="@color/sm_on_dark_muted"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/settings"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Settings"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_preferences" />
-
+        app:srcCompat="@android:drawable/ic_menu_preferences"
+        app:tint="@color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

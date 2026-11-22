@@ -2,4 +2,18 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- StockMate palette -->
+    <color name="sm_navy">#091158</color>          <!-- brand navy -->
+    <color name="sm_bg_top">#0E1A6E</color>
+    <color name="sm_bg_bottom">#050A35</color>
+    <color name="sm_accent">#3D5AFE</color>        <!-- primary actions -->
+    <color name="sm_surface">#F7F8FF</color>       <!-- list cards -->
+    <color name="sm_row">#ECEFFF</color>           <!-- list rows -->
+    <color name="sm_text">#1A237E</color>          <!-- text on light -->
+    <color name="sm_text_muted">#5C6BC0</color>
+    <color name="sm_on_dark_muted">#B3BCF5</color> <!-- secondary text on navy -->
+    <color name="sm_outline">#66FFFFFF</color>     <!-- outlined buttons on navy -->
+    <color name="sm_badge">#FFC857</color>         <!-- count badges -->
+    <color name="sm_on_badge">#3B2A00</color>
 </resources>

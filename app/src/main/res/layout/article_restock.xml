@@ -2,28 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#EAEAF1"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="5dp"
+    android:background="@drawable/bg_row"
+    android:gravity="center_vertical"
+    android:minHeight="60dp"
     android:orientation="horizontal"
-    android:padding="16dp">
+    android:paddingStart="18dp"
+    android:paddingEnd="14dp">
 
     <TextView
         android:id="@+id/tvArticleTitle"
-        android:layout_width="358dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:fontFamily="sans-serif-medium"
         android:text="Article Title"
-        android:textColor="#3F51B5"
-        android:textSize="25dp"
-        android:textStyle="bold" />
+        android:textColor="@color/sm_text"
+        android:textSize="19sp" />
 
     <TextView
         android:id="@+id/tvArticleCounter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_badge"
+        android:gravity="center"
+        android:minWidth="40dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="4dp"
         android:text="0"
-        android:textColor="#3F51B5"
-        android:textSize="25dp"
+        android:textColor="@color/sm_on_badge"
+        android:textSize="18sp"
         android:textStyle="bold" />
 </LinearLayout>
-
-

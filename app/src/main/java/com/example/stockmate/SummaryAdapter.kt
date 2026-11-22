@@ -54,8 +54,12 @@ open class SummaryAdapter(private var shopList: List<Article>) :
         } else if (holder is SummaryViewHolder && item is Article) {
             // Lier l'article au SummaryViewHolder
             holder.titleTextView.text = item.title
-            if (item.counter != 0){
+            // Only show the count badge when there is a count (restocks).
+            if (item.counter != 0) {
                 holder.counterTextView.text = item.counter.toString()
+                holder.counterTextView.visibility = View.VISIBLE
+            } else {
+                holder.counterTextView.visibility = View.GONE
             }
 
         }

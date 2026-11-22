@@ -16,6 +16,7 @@ class SummaryRestockAdapter(shopList: List<Article>) : SummaryAdapter(shopList) 
         } else if (holder is SummaryViewHolder && item is Article) {
             holder.titleTextView.text = item.title
             holder.counterTextView.text = item.counter.toString()
+            holder.counterTextView.visibility = android.view.View.VISIBLE
 
             holder.titleTextView.setOnClickListener {
                 categorizedShopList.removeAt(position)

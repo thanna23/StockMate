@@ -4,67 +4,72 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#091158"
-    android:visibility="visible">
+    android:background="@drawable/bg_screen">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:contentDescription="StockMate logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/stockmate_logo_500x500_transp" />
 
     <TextView
         android:id="@+id/tvSummary"
         android:layout_width="wrap_content"
-        android:layout_height="73dp"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="casual"
+        android:layout_height="wrap_content"
         android:text="Summary"
-        android:textColor="#FFFFFF"
-        android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        android:textAppearance="@style/TextAppearance.StockMate.Title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="332dp"
-        android:layout_height="490dp"
-        android:layout_marginBottom="120dp"
-        android:background="#EDF4FB"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/listCard"
+        style="@style/Widget.StockMate.ListCard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/endButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSummary">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingVertical="8dp" />
+    </com.google.android.material.card.MaterialCardView>
 
     <Button
         android:id="@+id/copyButton"
-        android:layout_width="wrap_content"
+        style="@style/Widget.StockMate.Button.Secondary"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:width="80dp"
-        android:backgroundTint="#072AEF"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="10dp"
         android:text="Copy"
-        android:textColor="#FFFFFF"
-        app:layout_constraintStart_toStartOf="@+id/recyclerView"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintBottom_toBottomOf="@+id/endButton"
+        app:layout_constraintEnd_toStartOf="@+id/endButton"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/endButton"
-        android:layout_width="wrap_content"
+        style="@style/Widget.StockMate.Button.Primary"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:width="80dp"
-        android:backgroundTint="#072AEF"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="24dp"
         android:text="End"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/copyButton"
-        app:layout_constraintEnd_toEndOf="@+id/recyclerView"
-        app:layout_constraintTop_toTopOf="@+id/copyButton" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="339dp"
-        android:layout_height="201dp"
-        android:layout_marginBottom="-64dp"
-        app:layout_constraintBottom_toTopOf="@+id/tvSummary"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/stockmate_logo_500x500_transp" />
-
-
-
+        app:layout_constraintStart_toEndOf="@+id/copyButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

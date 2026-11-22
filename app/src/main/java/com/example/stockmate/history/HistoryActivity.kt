@@ -1,9 +1,10 @@
 package com.example.stockmate.history
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -12,14 +13,15 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stockmate.R
+import com.google.android.material.button.MaterialButton
 
 /** Lists past order lists and restocks, newest first. Tap an entry to see its items. */
 class HistoryActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var tvStatus: TextView
-    private lateinit var btOrders: Button
-    private lateinit var btRestocks: Button
+    private lateinit var btOrders: MaterialButton
+    private lateinit var btRestocks: MaterialButton
 
     private var currentKind = HistoryKind.ORDER
 
@@ -53,8 +55,8 @@ class HistoryActivity : AppCompatActivity() {
 
     private fun show(kind: HistoryKind) {
         currentKind = kind
-        btOrders.alpha = if (kind == HistoryKind.ORDER) 1f else 0.5f
-        btRestocks.alpha = if (kind == HistoryKind.RESTOCK) 1f else 0.5f
+        styleTab(btOrders, selected = kind == HistoryKind.ORDER)
+        styleTab(btRestocks, selected = kind == HistoryKind.RESTOCK)
 
         recyclerView.adapter = null
         showStatus("Loading...")
@@ -71,6 +73,13 @@ class HistoryActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    /** Selected tab: filled accent. Unselected tab: transparent with an outline. */
+    private fun styleTab(button: MaterialButton, selected: Boolean) {
+        val fill = if (selected) getColor(R.color.sm_accent) else Color.TRANSPARENT
+        button.backgroundTintList = ColorStateList.valueOf(fill)
+        button.strokeWidth = if (selected) 0 else resources.getDimensionPixelSize(R.dimen.sm_stroke)
     }
 
     private fun showStatus(message: String) {
