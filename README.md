@@ -1,6 +1,6 @@
 # StockMate
 
-StockMate is an Android app I built in Kotlin to help restaurant employees keep track of inventory and manage restocking. It was my first Android app. I built it for the restaurant where I was working, and my coworkers and I used it there for a few months. The app is not fully built: it covers the core inventory workflow, but it is still a work in progress.
+StockMate is an Android app I built in Kotlin to help the staff of a restaurant's bar plan restocking and build order lists. It was my first Android app. I built it for the restaurant where I was working, and my coworkers and I used it there for a few months. It is still a work in progress.
 
 ## Why I built it
 
@@ -25,11 +25,7 @@ The app covers the bar's products (soft drinks, beers, wines, spirits, cocktail 
 
 ## Built by an employee, for employees
 
-Because I was one of the people doing this work, I designed StockMate around what restaurant staff actually need when they check supplies and handle restocking during a shift. The goal was to make inventory quick to manage from a phone and to help keep important items from being overlooked.
-
-## Project background
-
-StockMate was my first Android app. Building it for my own workplace meant I could watch the app being used every day, hear directly from coworkers, and see what worked and what didn't. That made it a practical introduction to building software for people doing everyday work.
+Because I was one of the people doing this work, I designed StockMate around what bar staff actually need when they check supplies and restock during a shift. Building it for my own workplace also meant I could watch it being used every day, hear directly from coworkers, and see what worked and what didn't.
 
 ## Project status
 
@@ -38,6 +34,8 @@ StockMate is not finished. The restock, order list and history features work, bu
 - The **Edit** button on the main screen does nothing yet.
 - The **Settings** screen shows a placeholder profile, and **Manage your account** is not wired up.
 - The list of items is written into the app's code, so changing it means updating the app.
+
+The end goal is live stock levels: the app would keep track of what's in stock as staff restock and order, so managers can see at any time what's missing or running low.
 
 ## Technology
 
@@ -52,4 +50,9 @@ StockMate uses Firebase to keep a shared history of the team's work:
 
 - **Cloud Firestore:** each finished restock or order list is saved, and the **History** screen shows past sessions. Saves made offline sync once the phone is back online.
 - **Authentication:** the app signs in anonymously in the background, so there's no login screen.
-- **Security rules:** only the app can read or add entries, and the history can't be edited or deleted.
+- **Security rules:** only signed-in users can read or add entries, and the history can't be edited or deleted.
+
+## Running it
+
+The Firebase config file (`google-services.json`) is not in this repository. To build the app, create your own Firebase project with Cloud Firestore and Anonymous sign-in enabled, and put its `google-services.json` in the `app/` folder.
+
